@@ -1,0 +1,114 @@
+%! TeX program = xelatex
+\documentclass[a4paper]{scrartcl}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{fullpage}
+\begin{document}
+\section{Effective parameters}
+Consider a photonic crystal composed of layers of two media $a$ and $b$. Layer $a$ has electric permittivity
+$\epsilon_{a}$, magnetic permeability $\mu_{a}$ and width $\ell_{a}$. Similarly, layer "b" has permittivity
+$\epsilon_{b}$, permeability $\mu_{b}$ and width $\ell_{b}$.
+\\
+Now let us look at fields present in the photonic crystal. Specifically, the component of \textbf{E} parallel to the
+layer boundaries $\mathbf{E_\parallel}$ and the component of \textbf{D} perpendicular to layer boundaries
+$\mathbf{D_\bot}$. From continuity conditions of these
+fields we can equate the fields at both sides and their average (which is equal to them, since electric intensity is
+conserved across the boundary):
+\begin{equation}
+      \mathbf{E}_{\parallel a} = \mathbf{E}_{\parallel b } = \mathbf{E}_{\parallel \textrm{ave} }
+\end{equation}
+and utilising the material relation $\mathbf{D}=\epsilon \mathbf{E}$ we can average out the vector of electric induction
+through the two layers:
+\begin{equation}
+      \mathbf{D}_{\parallel \textrm{ave} } = \frac{\ell_{a } \epsilon_{a } \mathbf{E}_{\parallel
+            a } + \ell_{b } \epsilon_{ b }
+\mathbf{E}_{\parallel b} }{\ell_{a} + \ell_{b}}
+\end{equation}
+\begin{equation}
+      \mathbf{D}_{\parallel \textrm{ave} } = \frac{\ell_{a } \epsilon_{a } + \ell_{b }
+      \epsilon_{b } }{\ell_{a } + \ell_{b }}
+      \mathbf{E}_{\parallel \textrm{ave} }
+\end{equation}
+thus we can conclude the derivation of eletric permittivity in direction parallel to the interface:
+\begin{equation}
+      \epsilon_{\parallel \textrm{eff} } = \frac{\ell_a \epsilon_a + \ell_b
+      \epsilon_b}{\ell_a + \ell_b }
+\end{equation}
+Now we can repeat this procedure for $\mathbf{D}_\bot$. Similarly, perpendicular component of electric induction is
+conserved across the boundary, so
+\begin{equation}
+      \mathbf{D}_{\bot \textrm{ave} } = \mathbf{D}_{\bot a } = \mathbf{D}_{\bot b }
+\end{equation}
+and using the same material relation as before we can average out the perpendicular component of the \textbf{E} field:
+\begin{equation}
+      \mathbf{E}_{\bot \textrm{ave} } = \frac{\ell_a \mathbf{E}_{\bot a } + \ell_b
+      \mathbf{E}_{\bot b }}{\ell_a + \ell_b }
+\end{equation}
+\begin{equation}
+      \mathbf{E}_{\bot \textrm{ave} } = \dfrac{\ell_a \dfrac{\mathbf{D}_{\bot a }}{\epsilon_a } + \dfrac{\mathbf{D}_{\bot
+      b }}{\epsilon_b }}{\ell_a + \ell_b }
+\end{equation}
+\begin{equation}
+      \mathbf{E}_{\bot \textrm{ave} } = \dfrac{\dfrac{\ell_a }{\epsilon_a } + \dfrac {\ell_b
+      }{\epsilon_b }}{ \ell_a + \ell_b }
+      \mathbf{D}_{\bot \textrm{ave}}
+\end{equation}
+and since $\mathbf{E} = \frac{1}{\epsilon} \mathbf{D}$
+\begin{equation}
+      \epsilon_{\bot \textrm{eff} } = \dfrac{\ell_a + \ell_b }{\dfrac{\ell_a
+      }{\epsilon_a } + \dfrac{\ell_b }{\epsilon_b }} =
+      \epsilon_a \epsilon_b \dfrac{\ell_a + \ell_b }{\ell_a
+      \epsilon_b + \ell_b \epsilon_a }
+\end{equation}
+Thus, we can conclude that effective permittivity is a tensor:
+\begin{equation}
+      \mathbf{\epsilon}_{\textrm{eff} } = \begin{pmatrix} \epsilon_{\parallel} & 0 & 0 \\ 0 & \epsilon_\parallel & 0 \\ 0 & 0 & \epsilon_\bot
+      \end{pmatrix}
+\end{equation}
+\newpage
+Similarly we can derive the effective description of magnetic permeability. Again, we will only consider the parallel
+component of magnetic intensity $\mathbf{H}_\parallel$ and the perpendicular component of magnetic induction
+$\mathbf{B}_\bot$. The material relation connecting them is $\mathbf{B} = \mu \mathbf{H}$ 
+\\
+Start with $\mathbf{B}_\bot$. Since this component is continuous across the interface, the average will simply be
+\begin{equation}
+      \mathbf{B}_{\bot \textrm{ave} } = \mathbf{B}_{\bot a } = \mathbf{B}_{\bot b }
+\end{equation}
+and for the average of $\mathbf{H}_{\bot}$ using the material relation we get
+\begin{equation}
+      \mathbf{H}_{\bot \textrm{ave} } = \dfrac{\ell_a \mathbf{H}_{\bot a } + \ell_b
+            \mathbf{H}_{\bot b }}{\ell_a + \ell_b } = \dfrac{\ell_a
+\dfrac{\mathbf{B}_{\bot a}}{\mu_a} + \ell_b \dfrac{\mathbf{B}_{\bot b}}{\mu_b}}{\ell_a + \ell_b} =
+\dfrac{\dfrac{\ell_a}{\mu_a} + \dfrac{\ell_b}{\mu_b}}{\ell_a + \ell_b} \mathbf{B}_{\bot \textrm{ave} }
+\end{equation}
+hence
+\begin{equation}
+      \mu_{\bot \textrm{eff} } = \dfrac{\ell_a + \ell_b}{ \dfrac{\ell_a}{\mu_a} + \dfrac{\ell_b}{\mu_b} } = \mu_a \mu_b \dfrac{
+      \ell_a + \ell_b }{\ell_a \mu_b + \ell_b \mu_a}
+\end{equation}
+And now similarly for $\mathbf{H}_{\parallel}$:
+\begin{equation}
+      \mathbf{H}_{\parallel \textrm{ave}} = \mathbf{H}_{\parallel a} = \mathbf{H}_{\parallel b}
+\end{equation}
+\begin{equation}
+      \mathbf{B}_{\parallel \textrm{ave} } = \dfrac{\ell_a \mathbf{B}_{\parallel a} + \ell_b \mathbf{B}_{\parallel b}}{\ell_a + \ell_b}
+\end{equation}
+again, using the material relation:
+\begin{equation}
+      \mathbf{B}_{\parallel \textrm{ave} } = \dfrac{ \ell_a \mu_a \mathbf{H}_{\parallel a} + \ell_b \mu_b \mathbf{H}_{\parallel b}
+      }{\ell_a + \ell_b} = \dfrac{ \ell_a \mu_a + \ell_b \mu_b }{\ell_a + \ell_b} \mathbf{H}_{\parallel \textrm{ave} }
+\end{equation}
+and comparing with the material relation
+\begin{equation}
+      \mu_{\parallel \textrm{eff} } = \dfrac{ \ell_a \mu_a + \ell_b \mu_b }{\ell_a + \ell_b}
+\end{equation}
+finally, putting relationships (13) and (17) together we get the permeability tensor:
+\begin{equation}
+      \mathbf{\mu}_{\textrm{eff} } = \begin{pmatrix} \mu_{\parallel} & 0 & 0 \\ 0 & \mu_\parallel & 0 \\ 0 & 0 & \mu_\bot
+      \end{pmatrix}
+\end{equation}
+\end{document}
