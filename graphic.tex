@@ -1,0 +1,78 @@
+\documentclass[a4paper]{scrartcl}
+\usepackage{polyglossia}
+\setdefaultlanguage{english}
+\usepackage{amsmath}
+\usepackage{tikz}
+\usepackage{amssymb}
+\usetikzlibrary{fadings}
+\usetikzlibrary{patterns}
+\usetikzlibrary{shadows.blur}
+\usetikzlibrary{shapes}
+
+\begin{document}
+
+\tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
+
+\begin{tikzpicture}[x=0.75pt,y=0.75pt,yscale=-1,xscale=1]
+      \draw (20,174) -- (425,174);
+      \draw [shift={(428.41,174.07)}, rotate = 180][fill={rgb, 255:red, 0; green, 0; blue, 0}][line width=0.08][draw opacity=0]
+            (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle;
+      \draw    (213,14) -- (213,360);
+      \draw [shift={(213,11.29)}, rotate = 90][fill={rgb, 255:red, 0; green, 0; blue, 0 }][line width=0.08][draw opacity=0]
+            (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle;
+      \draw (79,174) .. controls (79,100) and (360,100) .. (360,174);
+      \draw (213,174) -- (110,332);
+      \draw (332,63) -- (213,174);
+      \draw [shift={(335,61)}, rotate = 137.28][fill={rgb, 255:red, 0; green, 0; blue, 0}][line width=0.08][draw opacity=0]
+            (8.93,-4.29) -- (0,0) -- (8.93,4.29) -- cycle;
+      \draw [line width=1.5]    (213,174) -- (266,126);
+      \draw [shift={(268,124)}, rotate = 497.76][color={rgb, 255:red, 0; green, 0; blue, 0}][line width=1.5]
+            (14.21,-4.28) .. controls (9.04,-1.82) and (4.3,-0.39) .. (0,0) .. controls (4.3,0.39) and (9.04,1.82) .. (14.21,4.28);
+      \draw [line width=1.5]    (110,332) -- (164,250);
+      \draw [shift={(165.57,248.21)}, rotate = 483.07][color={rgb, 255:red, 0; green, 0; blue, 0}][line width=1.5]
+            (14.21,-4.28) .. controls (9.04,-1.82) and (4.3,-0.39) .. (0,0) .. controls (4.3,0.39) and (9.04,1.82) .. (14.21,4.28);
+      \draw (165,248) -- (203,270);
+      \draw [shift={(205,271)}, rotate = 210.33][color={rgb, 255:red, 0; green, 0; blue, 0}][line width=0.75]
+            (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29);
+      \draw (268,124) -- (294,145);
+      \draw [shift={(295.28,146.61)}, rotate = 219.95][color={rgb, 255:red, 0; green, 0; blue, 0}][line width=0.75]
+            (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29);
+      \draw (213.29,174.07) -- (316.08,332.76);
+      \draw [line width=1.5] (267,257) -- (213,175);
+      \draw [shift={(268.36,259.49)}, rotate = 236.93][color={rgb, 255:red, 0; green, 0; blue, 0}][line width=1.5]
+            (14.21,-4.28) .. controls (9.04,-1.82) and (4.3,-0.39) .. (0,0) .. controls (4.3,0.39) and (9.04,1.82) .. (14.21,4.28);
+      \draw (268,260) -- (230,282);
+      \draw [shift={(228.53,282.76)}, rotate = 329.7][color={rgb, 255:red, 0; green, 0; blue, 0}][line width=0.75]
+            (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29);
+      \draw (92,62) -- (213,175);
+      \draw [line width=1.5] (138,104) -- (85,56);
+      \draw [shift={(140,105.83)}, rotate = 222.24][color={rgb, 255:red, 0; green, 0; blue, 0}][line width=1.5]
+            (14.21,-4.28) .. controls (9.04,-1.82) and (4.3,-0.39) .. (0,0) .. controls (4.3,0.39) and (9.04,1.82) .. (14.21,4.28);
+      \draw (140,106) -- (114,128);
+      \draw [shift={(112.4,128.96)}, rotate = 320][color={rgb, 255:red, 0; green, 0; blue, 0}][line width=0.75]
+            (10.93,-3.29) .. controls (6.95,-1.4) and (3.31,-0.3) .. (0,0) .. controls (3.31,0.3) and (6.95,1.4) .. (10.93,3.29);
+      \draw (425,190) node  [font=\normalsize] [align=left] {y};
+      \draw (195,12) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize] [align=left] {z};
+      \draw (360,110) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$\dfrac{\omega ^{2}}{c^{2}}
+            =\dfrac{k_{y}}{\epsilon _{z}} +\dfrac{k_{z}}{\epsilon _{y}}$};
+      \draw (297,145) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$E_{2}^{+}$};
+      \draw (170,20) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$E_{1}^{+}$};
+      \draw (115,273) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$k_{1}^{+}$};
+      \draw (250,140) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$k_{2}^{+}$};
+      \draw (245,270) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$E_{1}^{-}$};
+      \draw (95,105) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$E_{2}^{-}$};
+      \draw (110,60) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$k_{2}^{-}$};
+      \draw (260,217) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$k_{1}^{-}$};
+      \draw (360,180) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$\epsilon_{r} ,\mu_{r}$};
+      \draw (335,20) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$\epsilon \ =\ \begin{pmatrix}
+      \epsilon _{\parallel} & 0 & 0\\
+      0 & \epsilon _{\parallel} & 0\\
+      0 & 0 & \epsilon _{\bot}
+      \end{pmatrix}$};
+      \draw (195,208) node [anchor=north west][inner sep=0.75pt]  [font=\small]  {$\theta_{1}$};
+      \draw (220,208) node [anchor=north west][inner sep=0.75pt]  [font=\small]  {$\theta_{1}$};
+      \draw (195,140) node [anchor=north west][inner sep=0.75pt]  [font=\small]  {$\theta_{2}$};
+      \draw (220,140) node [anchor=north west][inner sep=0.75pt]  [font=\small]  {$\theta_{2}$};
+\end{tikzpicture}
+
+\end{document}7
