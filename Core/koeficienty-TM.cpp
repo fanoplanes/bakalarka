@@ -16,18 +16,10 @@ int main()
 	const double eps_a = 1;
 	const double eps_b = 4;
 	const double eps_air = 1;
-	const double mi_b = 1;
 	const long double l_a = 1;
 	const long double l_b = 0.5;
 	const double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
 	const double delta = 1e-5;
-	long double k_a;
-	long double k_b;
-	long double k_air;
-	complex<long double> phi_a;
-	complex<long double> phi_b;
-	long double chi_tm;
-	long double chi_tm_air_a;
 	const long double sirkaap = 1.; 				//šírka poruchy a
 	const long double sirkabp = 0.5;				//šírka poruchy b
 
@@ -46,13 +38,13 @@ int main()
 
 	for(double omega = delta; omega < 2*omega_0; omega+=delta)
 	{
-		k_air = omega*sqrt(eps_air - sin(theta)*sin(theta));
-		k_a = omega*sqrt(eps_a - sin(theta)*sin(theta));
-		k_b = omega*sqrt(eps_b - sin(theta)*sin(theta));
-		phi_a = i*k_a*l_a;
-		phi_b = i*k_b*l_b;
-		chi_tm = eps_b*k_a/(eps_a*k_b);
-		chi_tm_air_a = eps_a*k_air/(eps_air*k_a);	//zo vzduchu do a
+		long double k_air = omega*sqrt(eps_air - sin(theta)*sin(theta));
+		long double k_a = omega*sqrt(eps_a - sin(theta)*sin(theta));
+		long double k_b = omega*sqrt(eps_b - sin(theta)*sin(theta));
+		complex<long double> phi_a = i*k_a*l_a;
+		complex<long double> phi_b = i*k_b*l_b;
+		long double chi_tm = eps_b*k_a/(eps_a*k_b);
+		long double chi_tm_air_a = eps_a*k_air/(eps_air*k_a);	//zo vzduchu do a
 
 		m_ab <<	1 + chi_tm, 1 - chi_tm,
 				1 - chi_tm, 1 + chi_tm;

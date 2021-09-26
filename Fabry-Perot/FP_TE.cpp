@@ -17,7 +17,6 @@ int main()
 	const double eps_air = 1;
 	const double eps_b = 4;
 	const double mi_a = 1;
-	const double mi_b = 1;
 	const double mi_air = 1;
 	const double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
 	const complex<long double> i  (0, 1);
