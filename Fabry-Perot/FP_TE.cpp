@@ -9,7 +9,6 @@ using namespace std;
 
 int main()
 {
-	const int N = 10;
 	const long double l_a = 15;
 	const long double l_b = 0.5;
 	const double delta = 1e-3;
@@ -25,8 +24,7 @@ int main()
 	long double k_a;
 	long double k_air;
 	long double chi_te_air_a;
-	complex<long double> phi_a = 0;
-	complex<long double> phi_b = 0;
+	complex<long double> phi_a;
 
 	Eigen::Matrix<complex<long double>, 2, 2> m_a;
 	Eigen::Matrix<complex<long double>, 2, 2> Out;

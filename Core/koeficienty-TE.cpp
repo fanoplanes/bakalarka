@@ -30,9 +30,9 @@ int main()
 	long double chi_te;
 	long double chi_te_air_a;
 	long double chi_te_air_b;
-	complex<long double> phi_a = 0;
-	complex<long double> phi_b = 0;
-	const double theta = 0*M_PI/24.;
+	complex<long double> phi_a;
+	complex<long double> phi_b;
+	//const double theta = 0*M_PI/24.;
 
 	Eigen::Matrix<long double, 2, 2> m_ab;
 	Eigen::Matrix<long double, 2, 2> m_ba;

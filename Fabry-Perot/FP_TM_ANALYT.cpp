@@ -12,7 +12,6 @@ int main()
       const double eps_air = 1.;
       const double eps_b = 4.;
       const double l_b = 0.5;
-      const double mi = 1.;
       const double l=15;
       const double delta = 1e-3;
       const double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);

@@ -16,9 +16,7 @@ int main()
 	const double eps_a = 1;
 	const double eps_b = 4;
 	const double eps_air = 1;
-	const double mi_a = 1;
 	const double mi_b = 1;
-	const double mi_air = 1;
 	const long double l_a = 1;
 	const long double l_b = 0.5;
 	const double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
@@ -26,8 +24,8 @@ int main()
 	long double k_a;
 	long double k_b;
 	long double k_air;
-	complex<long double> phi_a = 0;
-	complex<long double> phi_b = 0;
+	complex<long double> phi_a;
+	complex<long double> phi_b;
 	long double chi_tm;
 	long double chi_tm_air_a;
 	const long double sirkaap = 1.; 				//šírka poruchy a
