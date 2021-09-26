@@ -2,5 +2,5 @@
 
 Tento repozitár obsahuje všetky dokumenty týkajúce sa mojej bakalárskej práce.
 
-1. Všetky kódy
+1. Všetok kód
 2. Všetky .tex súbory
