@@ -39,8 +39,8 @@ int main()
 
 	for(double omega = delta; omega < 2*omega_0; omega+=delta)
 	{
-	      for(double theta = 0; theta < M_PI/2.; theta += theta_delta)
-	      {
+		for(double theta = 0; theta < M_PI/2.; theta += theta_delta)
+		{
 		long double k_air = omega*sqrt(eps_air - sin(theta)*sin(theta));
 		long double k_a = omega*sqrt(eps_a - sin(theta)*sin(theta));
 		long double k_b = omega*sqrt(eps_b - sin(theta)*sin(theta));
@@ -94,7 +94,7 @@ int main()
 
 		fout << omega/omega_0 << "\t" << theta*180./M_PI << "\t" << 1./(norm(Out(0, 0))) << endl;
 		//fout << omega/omega_0 << "\t" << abs(Out.determinant()) << endl;
-            }
+		}
             fout << endl;
 	}
 	//system("xmgrace Output-TM.dat");
