@@ -19,7 +19,8 @@ int main()
 	const long double l_a = 1;
 	const long double l_b = 0.5;
 	const double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
-	const double delta = 1e-5;
+	const double delta = 1e-3;
+	const double theta_delta = 1e-3;
 	const long double sirkaap = 1.; 				//šírka poruchy a
 	const long double sirkabp = 0.5;				//šírka poruchy b
 
@@ -38,6 +39,8 @@ int main()
 
 	for(double omega = delta; omega < 2*omega_0; omega+=delta)
 	{
+	      for(double theta = 0; theta < M_PI/2.; theta += theta_delta)
+	      {
 		long double k_air = omega*sqrt(eps_air - sin(theta)*sin(theta));
 		long double k_a = omega*sqrt(eps_a - sin(theta)*sin(theta));
 		long double k_b = omega*sqrt(eps_b - sin(theta)*sin(theta));
@@ -89,9 +92,10 @@ int main()
 
 		Out *= m_a * Air2A;							//~a(|b|a)^N|b'|a(|b|a)^N~
 
-		fout << omega/omega_0 << "\t" << 1./(norm(Out(0, 0))) << endl;
+		fout << omega/omega_0 << "\t" << theta*180./M_PI << "\t" << 1./(norm(Out(0, 0))) << endl;
 		//fout << omega/omega_0 << "\t" << abs(Out.determinant()) << endl;
-
+            }
+            fout << endl;
 	}
 	//system("xmgrace Output-TM.dat");
 }
