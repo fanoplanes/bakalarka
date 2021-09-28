@@ -60,16 +60,17 @@
       \draw (425,190) node  [font=\normalsize] [align=left] {y};
       \draw (195,12) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize] [align=left] {z};
       \draw (360,110) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$\dfrac{\omega ^{2}}{c^{2}}
-            =\dfrac{k_{y}}{\epsilon _{z}} +\dfrac{k_{z}}{\epsilon _{y}}$};
-      \draw (297,145) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$H_{2}^{+}$};
-      \draw (170,270) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$H_{1}^{+}$};
+            =\dfrac{k_{y}}{\epsilon _{\bot}} +\dfrac{k_{z}}{\epsilon _{\parallel}}$};
+      \draw (297,145) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$E_{2}^{+}$};
+      \draw (170,270) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$E_{1}^{+}$};
       \draw (115,273) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$k_{1}^{+}$};
       \draw (250,140) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$k_{2}^{+}$};
-      \draw (245,270) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$H_{1}^{-}$};
-      \draw (95,105) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$H_{2}^{-}$};
+      \draw (245,270) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$E_{1}^{-}$};
+      \draw (95,105) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$E_{2}^{-}$};
       \draw (110,60) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$k_{2}^{-}$};
       \draw (260,217) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$k_{1}^{-}$};
-      \draw (360,180) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$\epsilon_{r} ,\mu_{r}$};
+      \draw (360,180) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$\epsilon_{\textrm{rel}}
+      	,\mu_{\textrm{rel}}$};
       \draw (335,20) node [anchor=north west][inner sep=0.75pt]  [font=\normalsize]  {$\epsilon \ =\ \begin{pmatrix}
       \epsilon _{\parallel} & 0 & 0\\
       0 & \epsilon _{\parallel} & 0\\
@@ -211,9 +212,9 @@ transmission coefficient on the incidence angle and angular frequency of inciden
 also includes the same plots of the case of a photonic crystal with $N=10$ layers; layer $a$ has $\epsilon_a=1$ and
 $\ell_a=1$ and layer $b$ has $\epsilon_b = 4$ and $\ell_b = 0.5$. Approximation of a photonic crystal by an anisotropic
 slab should be valid only for small values of angular frequency. Note also the clearly visible Brewster's angle for TM
-polarization.
+polarization. The value of $\omega_0$ is $\dfrac{\pi}{2 \sqrt{\epsilon_b}\ell_b}$.
 \begin{figure}[b!]
 \centering
-\includegraphics[width=0.90\linewidth]{../Fabry-Perot/Pics/Compare.png}
+\includegraphics[width=0.85\linewidth]{../Fabry-Perot/Pics/Compare.png}
 \end{figure}
 \end{document}
