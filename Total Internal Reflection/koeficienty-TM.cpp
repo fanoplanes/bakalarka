@@ -16,6 +16,7 @@ int main()
 	const double eps_a = 1;
 	const double eps_b = 4;
 	const double eps_air = 1;
+	const double eps_1 = 4.;
 	const long double l_a = 1;
 	const long double l_b = 0.5;
 	const double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
@@ -32,6 +33,7 @@ int main()
 	Eigen::Matrix<complex<long double>, 2, 2> Out;
 	Eigen::Matrix<long double, 2, 2> Air2A;
 	Eigen::Matrix<long double, 2, 2> A2Air;
+	Eigen::Matrix<long double, 2, 2> One2A;
 	Eigen::Matrix<complex<long double>, 2, 2> m_ap;
 	Eigen::Matrix<complex<long double>, 2, 2> m_bp;
 
@@ -42,12 +44,14 @@ int main()
 		for(double theta = 0; theta < M_PI/2.; theta += theta_delta)
 		{
 		long double k_air = omega*sqrt(eps_air - sin(theta)*sin(theta));
+		long double k_one = omega*sqrt(eps_1 - sin(theta)*sin(theta));
 		long double k_a = omega*sqrt(eps_a - sin(theta)*sin(theta));
 		long double k_b = omega*sqrt(eps_b - sin(theta)*sin(theta));
 		complex<long double> phi_a = i*k_a*l_a;
 		complex<long double> phi_b = i*k_b*l_b;
 		long double chi_tm = eps_b*k_a/(eps_a*k_b);
 		long double chi_tm_air_a = eps_a*k_air/(eps_air*k_a);	//zo vzduchu do a
+		long double chi_tm_one_a = eps_a*k_one/(eps_1*k_a);
 
 		m_ab <<	1 + chi_tm, 1 - chi_tm,
 				1 - chi_tm, 1 + chi_tm;
@@ -60,6 +64,9 @@ int main()
 		Air2A /= 2.;
 
 		A2Air = Air2A.inverse();
+
+		One2A <<	1 + chi_tm_one_a, 1 - chi_tm_one_a,
+				1 - chi_tm_one_a, 1 + chi_tm_one_a;
 
 		m_a <<	exp(phi_a), 0,
 				0, exp(-phi_a);
@@ -92,7 +99,7 @@ int main()
 		//	Out *= M;								//(|b|a)^N|b'|a(|b|a)^N~
 		//}
 
-		Out *= m_a * Air2A;							//~a(|b|a)^N|b'|a(|b|a)^N~
+		Out *= m_a * One2A;							//~a(|b|a)^N|b'|a(|b|a)^N~
 
 		fout << omega/omega_0 << "\t" << theta*180./M_PI << "\t" << 1./(norm(Out(0, 0))) << endl;
 		//fout << omega/omega_0 << "\t" << abs(Out.determinant()) << endl;

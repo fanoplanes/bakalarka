@@ -44,6 +44,8 @@ int main()
 		Air2A << 	1 + chi_te_air_a, 1 - chi_te_air_a,
 				1 - chi_te_air_a, 1 + chi_te_air_a;
 
+		Air2A /= 2.;
+
 		A2Air = Air2A.inverse();
 
 		m_a << 	exp(phi_a), 0,
