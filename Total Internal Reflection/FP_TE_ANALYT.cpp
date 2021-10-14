@@ -7,8 +7,8 @@ using namespace std;
 int main()
 {
       //const double theta = 32*M_PI/128.;
-      const long double eps_1 = 1.;
-      const long double eps_2 = 2.;
+      const long double eps_1 = 16.;
+      const long double eps_2 = 4.;
       const long double eps_3 = 1.;
       const long double eps_b = 4.;
       const long double l_b = 0.5;
@@ -31,7 +31,7 @@ int main()
 
       ofstream fout("Output_FP_TE_ANALYT.dat");
 
-      for(long double omega = delta; omega <=2*omega_0; omega += delta)
+      for(long double omega = delta; omega <=0.5*omega_0; omega += delta)
       {
       for(long double theta = 0; theta < M_PI/2.; theta += theta_delta)
             {
