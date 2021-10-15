@@ -16,7 +16,7 @@ int main()
 	const long double sirkabp = 0.5;
 	const long double delta = 1e-3;
 	const long double theta_delta = 1e-3;
-	const long double eps_a = 4.;
+	const long double eps_a = 4.;			// one  | a | b | a | b | a | b | a |  air
 	const long double eps_air = 1.;
 	const long double eps_one = 16.;
 	const long double eps_b = 4.;
@@ -119,7 +119,18 @@ int main()
 		//	}
 
 		Out *= m_a * One2A;							//~a(|b|a)^N|b'|a(|b|a)^N~
-				fout << omega/omega_0 << "\t" << theta*180./M_PI << "\t" << 1 - R << endl;
+		complex<long double> r = -Out(1,0)/Out(1,1);
+		complex<long double> t = 1.L/Out(0,0);
+		long double R = norm(r);
+		long double T = norm(t);
+		if(eps_one == eps_air)
+		{
+			fout << omega/omega_0 << "\t" << theta*180./M_PI << "\t" << T << endl;
+		}
+		else
+		{
+			fout << omega/omega_0 << "\t" << theta*180./M_PI << "\t" << 1 - R << endl;
+		}
 		//fout <<  << endl;
 		//fout << omega/omega_0 << "\t" << abs(Air2A.determinant()) << endl;
 	      }
