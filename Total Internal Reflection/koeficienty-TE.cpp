@@ -52,10 +52,10 @@ int main()
 
 	ofstream fout("Output-TE.dat");
 
-      for(long double omega = delta; omega <= 0.5*omega_0; omega+=delta)
-      {
-	      for(long double theta=0; theta < M_PI/2.; theta+=theta_delta)
-	      {
+	for(long double omega = delta; omega <= 0.5*omega_0; omega+=delta)
+	{
+		for(long double theta=0; theta < M_PI/2.; theta+=theta_delta)
+		{
 		k_one = omega*sqrt(eps_one)*cos(theta);
 		long double inter_air = eps_air - eps_one*sin(theta)*sin(theta);
 		k_air = omega*sqrt(complex<long double> (inter_air, 0));
@@ -133,8 +133,8 @@ int main()
 		}
 		//fout <<  << endl;
 		//fout << omega/omega_0 << "\t" << abs(Air2A.determinant()) << endl;
-	      }
-	      fout << endl;
+		}
+		fout << endl;
 	}
 	//system("xmgrace Output-TE.dat");
 }

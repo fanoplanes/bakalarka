@@ -21,7 +21,7 @@ int main()
 	const double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
 	const double delta = 1e-3;
 	const double theta_delta = 1e-3;
-	const long double sirkaap = 1.; 				//šírka poruchy a
+	const long double sirkaap = 1.;				//šírka poruchy a
 	const long double sirkabp = 0.5;				//šírka poruchy b
 
 	Eigen::Matrix<long double, 2, 2> m_ab;
@@ -97,7 +97,7 @@ int main()
 		fout << omega/omega_0 << "\t" << theta*180./M_PI << "\t" << 1./(norm(Out(0, 0))) << endl;
 		//fout << omega/omega_0 << "\t" << abs(Out.determinant()) << endl;
 		}
-            fout << endl;
+		fout << endl;
 	}
 	//system("xmgrace Output-TM.dat");
 }

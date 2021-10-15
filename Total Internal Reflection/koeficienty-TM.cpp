@@ -22,7 +22,7 @@ int main()
 	const long double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
 	const long double delta = 1e-3;
 	const long double theta_delta = 1e-3;
-	const long double sirkaap = 1.; 				//šírka poruchy a
+	const long double sirkaap = 1.;				//šírka poruchy a
 	const long double sirkabp = 0.5;				//šírka poruchy b
 	complex<long double> k_one;
 	complex<long double> k_air;
@@ -122,7 +122,7 @@ int main()
 		}
 		//fout << omega/omega_0 << "\t" << abs(Out.determinant()) << endl;
 		}
-            fout << endl;
+		fout << endl;
 	}
 	//system("xmgrace Output-TM.dat");
 }

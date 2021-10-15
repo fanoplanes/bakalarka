@@ -23,7 +23,7 @@ int main()
 	const double mi_b = 1;
 	const double mi_air = 1;
 	const double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
-	const complex<long double> i  (0, 1);
+	const complex<long double> i	(0, 1);
 	long double k_a;
 	long double k_b;
 	long double k_air;
@@ -47,10 +47,10 @@ int main()
 
 	ofstream fout("Output-TE.dat");
 
-      for(double omega = delta; omega < 2.*omega_0; omega+=delta)
-      {
-	      for(double theta=0; theta < M_PI/2.; theta+=theta_delta)
-	      {
+	for(double omega = delta; omega < 2.*omega_0; omega+=delta)
+	{
+		for(double theta=0; theta < M_PI/2.; theta+=theta_delta)
+		{
 		k_air = omega*sqrt(eps_air - sin(theta)*sin(theta));
 		k_a = omega*sqrt(eps_a - sin(theta)*sin(theta));
 		k_b = omega*sqrt(eps_b - sin(theta)*sin(theta));
@@ -65,14 +65,14 @@ int main()
 		m_ab /= 2.;
 		m_ba = m_ab.inverse();
 
-		Air2A << 	1 + chi_te_air_a, 1 - chi_te_air_a,
+		Air2A <<	1 + chi_te_air_a, 1 - chi_te_air_a,
 				1 - chi_te_air_a, 1 + chi_te_air_a;
 
 		Air2A /= 2.;
 
 		A2Air = Air2A.inverse();
 
-		m_a << 	exp(phi_a), 0,
+		m_a <<	exp(phi_a), 0,
 				0, exp(-phi_a);
 
 		m_b <<	exp(phi_b), 0,
@@ -96,7 +96,7 @@ int main()
 			}
 
 		//Out *= m_a * m_ba * m_bp * m_ab ;					//|b'|a(|b|a)^N~
-		//Out *= m_ap * m_ba * m_b * m_ab;  //porucha a             //|b|a'(|b|a)^N~
+		//Out *= m_ap * m_ba * m_b * m_ab;	//porucha a			//|b|a'(|b|a)^N~
 
 		//for(int j=0; j<N; j++)
 		//	{
@@ -108,8 +108,8 @@ int main()
 		fout << omega/omega_0 << "\t" << theta*180./M_PI << "\t" << 1./(norm(Out(0, 0))) << endl;
 		//fout << omega/omega_0 << "\t" << abs(Out.determinant()) << endl;
 
-	      }
-	      fout << endl;
+		}
+		fout << endl;
 	}
 	//system("xmgrace Output-TE.dat");
 }
