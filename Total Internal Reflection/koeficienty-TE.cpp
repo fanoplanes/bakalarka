@@ -16,9 +16,9 @@ int main()
 	const long double sirkabp = 0.5;
 	const long double delta = 1e-3;
 	const long double theta_delta = 1e-3;
-	const long double eps_a = 4.;			// one  | a | b | a | b | a | b | a |  air
+	const long double eps_a = 1.;			// one  | a | b | a | b | a | b | a |  air
 	const long double eps_air = 1.;
-	const long double eps_one = 16.;
+	const long double eps_one = 4.;
 	const long double eps_b = 4.;
 	const long double mi_a = 1.;
 	const long double mi_b = 1.;

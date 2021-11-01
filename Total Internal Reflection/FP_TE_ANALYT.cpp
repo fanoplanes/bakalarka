@@ -7,8 +7,8 @@ using namespace std;
 int main()
 {
 	//const double theta = 32*M_PI/128.;
-	const long double eps_1 = 16.;
-	const long double eps_2 = 4.;
+	const long double eps_1 = 4.;
+	const long double eps_2 = 2.;
 	const long double eps_3 = 1.;
 	const long double eps_b = 4.;
 	const long double l_b = 0.5;

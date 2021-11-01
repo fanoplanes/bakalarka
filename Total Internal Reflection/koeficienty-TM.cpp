@@ -43,7 +43,7 @@ int main()
 
 	ofstream fout("Output-TM.dat");
 
-	for(long double omega = delta; omega < 2*omega_0; omega+=delta)
+	for(long double omega = delta; omega < 0.5*omega_0; omega+=delta)
 	{
 		for(long double theta = 0; theta < M_PI/2.; theta += theta_delta)
 		{
