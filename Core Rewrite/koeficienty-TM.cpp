@@ -12,8 +12,8 @@ int main()
 	const int N = 10;
 	const long double l_a = 1;
 	const long double l_b = 0.5;
-	const long double sirkaap = 1.;
-	const long double sirkabp = 0.5;
+	const long double sirkaap = 0.8;
+	const long double sirkabp = 0.45;
 	const long double delta = 1e-3;
 	const long double theta_delta = 1e-3;
 	const long double eps_a = 1.;			// one  | a | b | a | b | a | b | a |  air
@@ -25,7 +25,7 @@ int main()
 	const long double mi_air = 1.;
 	const long double mi_one = 1.;
 	const long double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
-	const complex<long double> i	(0, 1);
+	const complex<long double> i  (0, 1);
 	complex<long double> k_a;
 	complex<long double> k_b;
 	complex<long double> k_air;
@@ -57,7 +57,12 @@ int main()
 
 	I << 1,0,0,1;
 	string input;
-	for(int i=0; i<N; i++)
+	for(int i=0; i<2; i++)
+	{
+		input += "ab";
+	}
+	input += "ay";
+	for(int i=0; i<7; i++)
 	{
 		input += "ab";
 	}
@@ -69,8 +74,20 @@ int main()
 	string ab = "ab";
 	string bb = "bb";
 	string ba = "ba";
+	string xa = "xa";
+	string ax = "ax";
+	string xb = "xb";
+	string yb = "yb";
+	string by = "by";
+	string bx = "bx";
+	string ay = "ay";
+	string ya = "ya";
+	string xy = "xy";
+	string yx = "yx";
 	string a = "a";
+	string x = "x";
 	string b = "b";
+	string y = "y";
 
 	string input_0 (1, input[0]);
 	if(input_0==a) structure[0]=0;
@@ -84,6 +101,8 @@ int main()
 		string input_iter (1, input[iter]);
 		if(input_iter==a) structure[2*iter+1]=3;
 		if(input_iter==b) structure[2*iter+1]=4;
+		if(input_iter==x) structure[2*iter+1]=30;
+		if(input_iter==y) structure[2*iter+1]=40;
 	}
 
 	for(int iter=0; iter<input_length-1; iter++)
@@ -91,15 +110,15 @@ int main()
 		string part_1 (1,input[iter]);
 		string part_2 (1,input[iter+1]);
 		string comp = part_1 + part_2;
-		if(comp==aa) structure[2*iter+2]=5;
-		if(comp==bb) structure[2*iter+2]=6;
-		if(comp==ab) structure[2*iter+2]=1;
-		if(comp==ba) structure[2*iter+2]=2;
+		if(comp==aa || comp == xa || comp == ax) structure[2*iter+2]=5;
+		if(comp==bb || comp == yb || comp == by) structure[2*iter+2]=6;
+		if(comp==ab || comp==xb || comp==ay || comp==xy) structure[2*iter+2]=1;
+		if(comp==ba || comp==ya || comp==bx || comp==yx) structure[2*iter+2]=2;
 	}
 
-	ofstream fout("Output-TM.dat");
+	ofstream fout("Output-TE.dat");
 
-	for(long double omega = delta; omega <= 2*omega_0; omega+=delta)
+	for(long double omega = delta; omega <= 0.5*omega_0; omega+=delta)
 	{
 		for(long double theta=0; theta < M_PI/2.; theta+=theta_delta)
 		{
@@ -125,14 +144,14 @@ int main()
 		m_ab /= 2.;
 		m_ba = m_ab.inverse();
 
-		Air2A <<	1.L + chi_te_air_a, 1.L - chi_te_air_a,
+		Air2A << 	1.L + chi_te_air_a, 1.L - chi_te_air_a,
 				1.L - chi_te_air_a, 1.L + chi_te_air_a;
 
 		Air2A /= 2.L;
 
 		A2Air = Air2A.inverse();
 
-		Air2B <<	1.L + chi_te_air_b, 1.L - chi_te_air_b,
+		Air2B << 	1.L + chi_te_air_b, 1.L - chi_te_air_b,
 				1.L - chi_te_air_b, 1.L + chi_te_air_b;
 
 		Air2B /= 2.L;
@@ -149,7 +168,7 @@ int main()
 
 		One2B /= 2.L;
 
-		m_a <<	exp(phi_a), 0,
+		m_a << 	exp(phi_a), 0,
 				0, exp(-phi_a);
 
 		m_b <<	exp(phi_b), 0,
@@ -169,6 +188,8 @@ int main()
 			if(structure[iterat]==2) Out *= m_ba;
 			if(structure[iterat]==3) Out *= m_a;
 			if(structure[iterat]==4) Out *= m_b;
+			if(structure[iterat]==30) Out *= m_ap;
+			if(structure[iterat]==40) Out *= m_bp;
 			if(structure[iterat]==5) Out *= I;
 			if(structure[iterat]==6) Out *= I;
 			if(structure[iterat]==10) Out *= One2A;
@@ -194,5 +215,5 @@ int main()
 		}
 		fout << endl;
 	}
-	system("gnuplot -p -c plot-TM.p");
+	system("gnuplot -p -c plot-TE.p");
 }
