@@ -1,29 +1,34 @@
-#define SWITCH 1
+#define SWITCH 1 //v mode 1 pocita s boost multiprecision, v mode 0 s built-in double presnostou
 #include <cmath>
 #include <fstream>
+
 #if SWITCH==1
 #include <boost/multiprecision/mpc.hpp>
 #include <boost/multiprecision/mpfr.hpp>
 #include <boost/multiprecision/eigen.hpp>
 #include <boost/math/constants/constants.hpp>
 #endif
+
 #include <eigen3/Eigen/Core>
 #include <eigen3/Eigen/LU>
 #include <iostream>
 #include <complex>
+
 #if SWITCH==1
+#define COMPLEX_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpc_complex_backend<50> >
+#define FLOAT_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpfr_float_backend<50> >
 #define PI boost::math::constants::pi<FLOAT_TYPE>()
-#define COMPLEX_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpc_complex_backend<500> >
-#define FLOAT_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpfr_float_backend<500> >
 using namespace boost::multiprecision;
 #endif
+
 #if SWITCH==0
 #define COMPLEX_TYPE complex<double>
 #define FLOAT_TYPE double
 #define PI M_PI
 #endif
+
 using namespace std;
-const double eps_one = 1.;		// one  | vzorka |  air
+const FLOAT_TYPE eps_one = 1.;		// one  | vzorka |  air
 const COMPLEX_TYPE i (0, 1);
 
 Eigen::Matrix<COMPLEX_TYPE, 2, 2> transfermatrix(FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE);
@@ -31,11 +36,9 @@ Eigen::Matrix<COMPLEX_TYPE, 2, 2> intermatrix(FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE
 
 int main()
 {
-	const int N = 100;
+	const int N = 10;
 	const FLOAT_TYPE l_a = 1;
 	const FLOAT_TYPE l_b = FLOAT_TYPE(1)/2;
-	const FLOAT_TYPE sirkaap = 1;
-	const FLOAT_TYPE sirkabp = FLOAT_TYPE(1)/2;
 	const FLOAT_TYPE delta = FLOAT_TYPE(1)/100;
 	const FLOAT_TYPE theta_delta = FLOAT_TYPE(1)/100;
 	const FLOAT_TYPE eps_a = 1;
@@ -104,7 +107,7 @@ int main()
 			cout << Out.determinant() << endl;
 
 			COMPLEX_TYPE r = -Out(1,0)/Out(1,1);
-			COMPLEX_TYPE t = 1./Out(0,0);
+			COMPLEX_TYPE t = 1./Out(1,0);
 			FLOAT_TYPE R = norm(r);
 			FLOAT_TYPE T = norm(t);
 			if(eps_one == eps_air)
