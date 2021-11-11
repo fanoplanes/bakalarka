@@ -20,8 +20,8 @@ int main()
 	const long double l_b = 0.5;
 	const long double sirkaap = 1.;
 	const long double sirkabp = 0.5;
-	const long double delta = 1e-3;
-	const long double theta_delta = 1e-3;
+	const long double delta = 1e-2;
+	const long double theta_delta = 1e-2;
 	const long double eps_a = 1.;
 	const long double eps_air = 1.;
 	const long double eps_b = 4.;
