@@ -29,7 +29,7 @@ using namespace boost::multiprecision;
 #endif
 
 using namespace std;
-const FLOAT_TYPE eps_one = 1.;		// one  | vzorka |  air
+const FLOAT_TYPE eps_one = 2.;		// one  | vzorka |  air
 const FLOAT_TYPE mi_one = 1.;
 const COMPLEX_TYPE i  (0, 1);
 
