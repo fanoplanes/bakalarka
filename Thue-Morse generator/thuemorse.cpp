@@ -7,7 +7,7 @@ int main()
 {
 	int exp=5;
 	int L = pow(2, exp);
-	bool result[(int)pow(2,exp)];
+	bool result[L];
 	result[0]=0;
 	for(int i = 0; i<exp; i++)
 	{
@@ -17,7 +17,7 @@ int main()
 		}
 	}
 
-	for(int i=0; i<pow(2,exp); i++)
+	for(int i=0; i<L; i++)
 	{
 		cout << result[i];
 	}
