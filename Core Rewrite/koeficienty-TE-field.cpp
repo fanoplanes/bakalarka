@@ -16,8 +16,8 @@
 #include <complex>
 
 #if SWITCH==1
-#define COMPLEX_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpc_complex_backend<100> >
-#define FLOAT_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpfr_float_backend<100> >
+#define COMPLEX_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpc_complex_backend<200> >
+#define FLOAT_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpfr_float_backend<200> >
 #define PI boost::math::constants::pi<FLOAT_TYPE>()
 using namespace boost::multiprecision;
 #endif
@@ -38,7 +38,7 @@ Eigen::Matrix<COMPLEX_TYPE, 2, 2> intermatrix(FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE
 
 int main()
 {
-	const int N = 10;
+	const int N = 1000;
 	const FLOAT_TYPE l_a = 1;
 	const FLOAT_TYPE l_b = 0.5;
 	const FLOAT_TYPE sirkaap = 1.;
@@ -80,8 +80,10 @@ int main()
 
 	Eigen::Matrix<COMPLEX_TYPE, 2, 2> Out;
 	Eigen::Matrix<COMPLEX_TYPE, 2, 1> E;
+	Eigen::Matrix<COMPLEX_TYPE, 2, 2> I;
 
-	ofstream fout("Output-TE.dat");
+	I<< 1, 0, 0, 1;
+
 	ofstream eout("Field.dat");
 
 	FLOAT_TYPE omega = omega_0;
@@ -94,33 +96,19 @@ int main()
 
 			for(int i=0; i<2*N-1; i++)
 			{
-				E << 1, 0;
+			      Out = I;
 				Out = intermatrix(structure[i][0], structure[i][1], theta, omega) * Out; //
 				Out = transfermatrix(structure[i][0], structure[i+1][0], theta, omega) * Out; //
 				E = Out * E;
 				eout << i << "\t" << sqrt(norm(E(0))+norm(E(1))) << endl;
 			}
 
-			E << 1, 0;
+			Out = I;
 			Out = intermatrix(structure[2*N-1][0], structure[2*N-1][1], theta, omega) * Out; //
 			Out = transfermatrix(structure[2*N-1][0], eps_air, theta, omega) * Out; //
 			E = Out * E;
 			eout << 2*N-1 << "\t" << sqrt(norm(E(0))+norm(E(1))) << endl;
 
-			COMPLEX_TYPE r = -Out(1,0)/Out(1,1);
-			COMPLEX_TYPE t = 1./Out(0,0);
-			FLOAT_TYPE R = norm(r);
-			FLOAT_TYPE T = norm(t);
-			{
-			if(eps_one == eps_air)
-			{
-				fout << omega/omega_0 << "\t" << theta*180./PI << "\t" << T << endl;
-			}
-			else
-			{
-				fout << omega/omega_0 << "\t" << theta*180./PI << "\t" << 1 - R << endl;
-			}
-			}
 	system("gnuplot -p -c Field.p");
 }
 Eigen::Matrix<COMPLEX_TYPE, 2, 2> transfermatrix(FLOAT_TYPE permittivity1, FLOAT_TYPE permittivity2, FLOAT_TYPE theta, FLOAT_TYPE omega)

@@ -16,8 +16,8 @@
 #include <complex>
 
 #if SWITCH==1
-#define COMPLEX_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpc_complex_backend<100> >
-#define FLOAT_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpfr_float_backend<100> >
+#define COMPLEX_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpc_complex_backend<50> >
+#define FLOAT_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpfr_float_backend<50> >
 #define PI boost::math::constants::pi<FLOAT_TYPE>()
 using namespace boost::multiprecision;
 #endif
@@ -82,7 +82,7 @@ int main()
 
 	ofstream fout("Output-TE.dat");
 
-	for(FLOAT_TYPE omega = delta; omega <= 0.5*omega_0; omega+=delta)
+	for(FLOAT_TYPE omega = delta; omega <= 2*omega_0; omega+=delta)
 	{
 		omp_set_num_threads(omp_get_max_threads());
 		#pragma omp parallel for schedule (dynamic) ordered default (shared) private (thett, Out)
