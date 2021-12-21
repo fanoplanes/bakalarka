@@ -1,3 +1,4 @@
+// -*- compile-command: "g++ -march=native -Ofast koeficienty-TM-field.cpp -o koeficienty-TM-field -lmpd -lmpfr -fopenmp && ./koeficienty-TM-field" -*-
 #define SWITCH 1 //v mode 1 pocita s boost multiprecision, v mode 0 s built-in double presnostou
 #include <cmath>
 #include <fstream>

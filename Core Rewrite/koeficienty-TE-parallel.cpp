@@ -1,3 +1,4 @@
+// -*- compile-command: "g++ -march=native -Ofast koeficienty-TE-parallel.cpp -o koeficienty-TE-parallel -lmpd -lmpfr -fopenmp && ./koeficienty-TE-parallel" -*-
 #define SWITCH 1 //v mode 1 pocita s boost multiprecision, v mode 0 s built-in double presnostou
 #include <cmath>
 #include <fstream>
