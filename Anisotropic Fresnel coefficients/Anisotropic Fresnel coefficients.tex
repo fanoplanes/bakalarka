@@ -1,4 +1,4 @@
-%! TeX program = xelatex
+%! TeX program = xetex
 \documentclass[a4paper]{scrartcl}
 \usepackage{polyglossia}
 \setdefaultlanguage{english}
@@ -12,7 +12,7 @@
 \usetikzlibrary{patterns}
 \usetikzlibrary{shadows.blur}
 \usetikzlibrary{shapes}
-\begin {document}
+\begin{document}
 \section{Anisotropic Fresnel coefficients}
 
 \tikzset{every picture/.style={line width=0.75pt}} %set default line width to 0.75pt
@@ -85,14 +85,14 @@
 on both sides of the interface. TM polarization.}
 \label{Fig. 1}
 \end{figure}
-Let us consider an interface between an isotropic and an anisotropic medium, as shown in figure \ref{Fig. 1}. Sice we
+Let us consider an interface between an isotropic and an anisotropic medium, as shown in figure \ref{Fig. 1}. Since we
 are focusing on the case of uniaxial anisotropy (only the $\epsilon_{zz}$ component of the permittivity tensor is
 different) the case of TE polarized waves is trivial, since the incident wave does not interact with the anomalous
 component of the permittivity tensor. TM polarized light has only the x component of magnetic intensity field
 $\mathbf{H}=(H_x,0,0)$.
-Let us now consider a wavi incident on the interface from the isotropic side.
-Utilizing Maxwell's equations we can connect the magnitudes of components of the electric intensity fiels with the
-x-component of magetic intensity:
+Let us now consider a wave incident on the interface from the isotropic side.
+Utilizing Maxwell's equations we can connect the magnitudes of components of the electric intensity fields with the
+x-component of magnetic intensity:
 \begin{equation}
       \mathbf{k}_1 \times \mathbf{H}_1 = -\omega\epsilon\mathbf{E}_1
 \end{equation}
@@ -174,7 +174,7 @@ Transmission amplitude is given simply as
       t = \dfrac{2k_{1z}^+ / \epsilon_\textrm{rel}}{\dfrac{k_{2z}^+}{\epsilon_\parallel} +
 \dfrac{k_{1z}^+}{\epsilon_\textrm{rel} }}
 \end{equation}
-From now on, these will be referred to as $T_1$ and $t_1$. Let us now consider the converse problem -- a wave traveling
+From now on, these will be referred to as $T_1$ and $t_1$. Let us now consider the converse problem --- a wave traveling
 from the anisotropic medium and being transmitted into the isotropic medium. We will refer back to figure \ref{Fig. 1}.
 Incident wave has k-vector $k_{2}^-$ and is refracted with angle $\theta_1$. Let us now find the angle of incidence
 $\theta_2$. This is given simply as
@@ -200,7 +200,7 @@ and using $t = r + 1$:
       r_2 = \dfrac{ \dfrac{k_{2z}^-}{\epsilon_\parallel} - \dfrac{k_{1z}^-}{\epsilon_\textrm{rel}} }{ \dfrac{k_{2z}^-}{\epsilon_\parallel} + \dfrac{k_{1z}^-}{\epsilon_\textrm{rel}} }
 \end{equation}
 \newpage
-\section{Transmission throught an anisotropic slab, Fabry-Perot oscillations}
+\section{Transmission through an anisotropic slab, Fabry-Perot oscillations}
 Standard formula for Fabry-Perot oscillations still holds:
 \begin{equation}
       T = \dfrac{1}{1 + \dfrac{4R_0}{(1-R_0)^2}\sin^2 k_{2z} \ell}
@@ -218,3 +218,7 @@ polarization. The value of $\omega_0$ is $\dfrac{\pi}{2 \sqrt{\epsilon_b}\ell_b}
 \includegraphics[width=0.85\linewidth]{../Fabry-Perot/Pics/Compare.png}
 \end{figure}
 \end{document}
+
+% Local Variables:
+% TeX-engine: xetex
+% End:
