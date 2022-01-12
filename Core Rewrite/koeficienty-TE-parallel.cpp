@@ -1,4 +1,4 @@
-// -*- compile-command: "g++ -march=native -Ofast koeficienty-TE-parallel.cpp -o koeficienty-TE-parallel -lmpd -lmpfr -fopenmp && ./koeficienty-TE-parallel" -*-
+// -*- compile-command: "g++ -march=native -Ofast koeficienty-TE-parallel.cpp -o koeficienty-TE-parallel -lmpc -lmpfr -fopenmp && ./koeficienty-TE-parallel" -*-
 #define SWITCH 1 //v mode 1 pocita s boost multiprecision, v mode 0 s built-in double presnostou
 #include <cmath>
 #include <fstream>
@@ -39,13 +39,11 @@ Eigen::Matrix<COMPLEX_TYPE, 2, 2> intermatrix(FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE
 
 int main()
 {
-	const int N = 10;
+	const int N = 64;
 	const FLOAT_TYPE l_a = 1;
 	const FLOAT_TYPE l_b = 0.5;
-	const FLOAT_TYPE sirkaap = 1.;
-	const FLOAT_TYPE sirkabp = 0.5;
-	const FLOAT_TYPE delta = 1e-2;
-	const FLOAT_TYPE theta_delta = 1e-2;
+	const FLOAT_TYPE delta = 3e-3;
+	const FLOAT_TYPE theta_delta = 3e-3;
 	const FLOAT_TYPE eps_a = 1.;
 	const FLOAT_TYPE eps_air = 1.;
 	const FLOAT_TYPE eps_b = 4.;
@@ -56,34 +54,45 @@ int main()
 	FLOAT_TYPE structure[2*N][2];
 	unsigned long int thett;
 
-	for(int i=0; i<N/2; i++)
+	FLOAT_TYPE eps_parr=0;
+	FLOAT_TYPE eps_perp=0;
+	FLOAT_TYPE iterator=0;
+
+	for(int i=0; i<N; i++)
 	{
 		structure[2*i][0] = eps_a;
 		structure[2*i][1] = l_a;
 	}
-	for(int i=0; i<N/2; i++)
+	for(int i=0; i<N; i++)
 	{
 		structure[2*i +1][0] = eps_b;
 		structure[2*i +1][1] = l_b;
 	}
 
-	for(int i=N/2; i<N; i++)
+
+	for(int a=0; a<N; a++)
 	{
-		structure[2*i][0] = eps_b;
-		structure[2*i][1] = l_b;
-	}
-	for(int i=N/2; i<N; i++)
-	{
-		structure[2*i +1][0] = eps_a;
-		structure[2*i +1][1] = l_a;
+		eps_parr += structure[a][0]*structure[a][1];
+		iterator += structure[a][1];
 	}
 
+	eps_parr /= iterator;
+
+	for(int a=0; a<N; a++)
+	{
+		eps_perp += structure[a][1]/structure[a][0];
+	}
+
+	eps_perp = iterator/eps_perp;
+
+	cout << eps_parr << endl;
+	cout << eps_perp << endl;
 
 	Eigen::Matrix<COMPLEX_TYPE, 2, 2> Out;
 
 	ofstream fout("Output-TE.dat");
 
-	for(FLOAT_TYPE omega = delta; omega <= 2*omega_0; omega+=delta)
+	for(FLOAT_TYPE omega = delta; omega <= 0.5*omega_0; omega+=delta)
 	{
 		omp_set_num_threads(omp_get_max_threads());
 		#pragma omp parallel for schedule (dynamic) ordered default (shared) private (thett, Out)

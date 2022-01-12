@@ -1,4 +1,4 @@
-// -*- compile-command: "g++ -march=native -Ofast koeficienty-TM.cpp -o koeficienty-TM -lmpd -lmpfr -fopenmp && ./koeficienty-TM" -*-
+// -*- compile-command: "g++ -march=native -Ofast koeficienty-TM.cpp -o koeficienty-TM -lmpc -lmpfr -fopenmp && ./koeficienty-TM" -*-
 #include <cmath>
 #include <fstream>
 #include <eigen3/Eigen/Core>

@@ -17,8 +17,8 @@
 #include <complex>
 
 #if SWITCH==1
-#define COMPLEX_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpc_complex_backend<200> >
-#define FLOAT_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpfr_float_backend<200> >
+#define COMPLEX_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpc_complex_backend<500> >
+#define FLOAT_TYPE boost::multiprecision::number<boost::multiprecision::backends::mpfr_float_backend<500> >
 #define PI boost::math::constants::pi<FLOAT_TYPE>()
 using namespace boost::multiprecision;
 #endif
@@ -30,7 +30,7 @@ using namespace boost::multiprecision;
 #endif
 
 using namespace std;
-const FLOAT_TYPE eps_one = 1.;		// one  | vzorka |  air
+const FLOAT_TYPE eps_one = 4.;		// one  | vzorka |  air
 const FLOAT_TYPE mi_one = 1.;
 const COMPLEX_TYPE i  (0, 1);
 
@@ -39,45 +39,51 @@ Eigen::Matrix<COMPLEX_TYPE, 2, 2> intermatrix(FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE
 
 int main()
 {
-	const int N = 1000;
-	const FLOAT_TYPE l_a = 1;
-	const FLOAT_TYPE l_b = 0.5;
-	const FLOAT_TYPE sirkaap = 1.;
-	const FLOAT_TYPE sirkabp = 0.5;
+	int n=12; //377
+	int arr0[] = {0};
+	int arr1[] = {0,1};
+	vector<bool> vec0;
+	vector<bool> vec1;
+	vector<bool> vec;
+	vec0.assign(arr0, arr0+1);
+	vec1.assign(arr1, arr1+2);
+	for(int i=2; i<=n; i++)
+	{
+		vec=vec1;
+		vec.insert(vec.end(),vec0.begin(),vec0.end());
+		vec0=vec1;
+		vec1=vec;
+	}
+
+	const int N = 128;
+
+	const FLOAT_TYPE l_average = 1.5;
+
+	const FLOAT_TYPE phi = (1+sqrt(5))/2;
+	const FLOAT_TYPE nu = 0.4;
+
+	const FLOAT_TYPE l_a = (1+phi)*l_average/(nu+phi);
+	const FLOAT_TYPE l_b = nu*l_a;
+
 	const FLOAT_TYPE delta = 1e-2;
 	const FLOAT_TYPE theta_delta = 1e-2;
 	const FLOAT_TYPE eps_a = 1.;
-	const FLOAT_TYPE eps_air = 1.;
-	const FLOAT_TYPE eps_b = 4.;
+	const FLOAT_TYPE eps_air = 4.;
+	const FLOAT_TYPE eps_b = 5.;
 	const FLOAT_TYPE mi_a = 1.;
 	const FLOAT_TYPE mi_b = 1.;
 	const FLOAT_TYPE mi_air = 1.;
+
 	const FLOAT_TYPE omega_0 = PI/(2*sqrt(eps_b)*l_b);
-	FLOAT_TYPE structure[2*N][2];
+
+	FLOAT_TYPE structure[N][2];
 	unsigned long int thett;
 
-	for(int i=0; i<N/2; i++)
+	for(int i=0; i<N; i++)
 	{
-		structure[2*i][0] = eps_a;
-		structure[2*i][1] = l_a;
+		structure[i][0] = (i%2==0) ? eps_a : eps_b;
+		structure[i][1] = (vec[i]==0) ? l_a : l_b;
 	}
-	for(int i=0; i<N/2; i++)
-	{
-		structure[2*i +1][0] = eps_b;
-		structure[2*i +1][1] = l_b;
-	}
-
-	for(int i=N/2; i<N; i++)
-	{
-		structure[2*i][0] = eps_b;
-		structure[2*i][1] = l_b;
-	}
-	for(int i=N/2; i<N; i++)
-	{
-		structure[2*i +1][0] = eps_a;
-		structure[2*i +1][1] = l_a;
-	}
-
 
 	Eigen::Matrix<COMPLEX_TYPE, 2, 2> Out;
 	Eigen::Matrix<COMPLEX_TYPE, 2, 1> E;
@@ -87,15 +93,15 @@ int main()
 
 	ofstream eout("Field.dat");
 
-	FLOAT_TYPE omega = omega_0;
-	FLOAT_TYPE theta = 0;
+	FLOAT_TYPE omega = 0.153*omega_0;
+	FLOAT_TYPE theta = 1.056; //60.5°
 
 			E << 1, 0;
 			Out = transfermatrix(eps_one, structure[0][0], theta, omega);
 			E = Out * E;
 			eout << 0 << "\t" << sqrt(norm(E(0))+norm(E(1))) << endl;
 
-			for(int i=0; i<2*N-1; i++)
+			for(int i=0; i<N-1; i++)
 			{
 			      Out = I;
 				Out = intermatrix(structure[i][0], structure[i][1], theta, omega) * Out; //
@@ -105,10 +111,10 @@ int main()
 			}
 
 			Out = I;
-			Out = intermatrix(structure[2*N-1][0], structure[2*N-1][1], theta, omega) * Out; //
-			Out = transfermatrix(structure[2*N-1][0], eps_air, theta, omega) * Out; //
+			Out = intermatrix(structure[N-1][0], structure[N-1][1], theta, omega) * Out; //
+			Out = transfermatrix(structure[N-1][0], eps_air, theta, omega) * Out; //
 			E = Out * E;
-			eout << 2*N-1 << "\t" << sqrt(norm(E(0))+norm(E(1))) << endl;
+			eout << N-1 << "\t" << sqrt(norm(E(0))+norm(E(1))) << endl;
 
 	system("gnuplot -p -c Field.p");
 }

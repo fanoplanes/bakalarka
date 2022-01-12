@@ -7,13 +7,13 @@ using namespace std;
 int main()
 {
 	//const double theta = 32*M_PI/128.;
-	const long double eps_1 = 1.;
-	const long double eps_2 = 2.;
-	const long double eps_3 = 1.;
-	const long double eps_b = 4.;
+	const long double eps_1 = 4.;
+	const long double eps_2 = 3.012;
+	const long double eps_3 = 4.;
+	const long double eps_b = 5.;
 	const long double l_b = 0.5;
-	const long double l=15;
-	const long double delta = 1e-2;
+	const long double l=1.5*64;
+	const long double delta = 1e-3;
 	const long double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
 	complex<long double> k_1z;
 	complex<long double> k_2z;
@@ -27,11 +27,11 @@ int main()
 	const complex<long double> i (0,1);
 	long double T;
 	long double R;
-	const double theta_delta = 1e-2;
+	const double theta_delta = 1e-3;
 
 	ofstream fout("Output_FP_TE_ANALYT.dat");
 
-	for(long double omega = delta; omega <=0.5*omega_0; omega += delta)
+	for(long double omega = delta; omega <=omega_0; omega += delta)
 	{
 	for(long double theta = 0; theta < M_PI/2.; theta += theta_delta)
 		{
