@@ -3,23 +3,23 @@
 
 using namespace std;
 
-const FLOAT_TYPE eps_one = 4.; // one  | vzorka |  air
+const FLOAT_TYPE eps_one = 1.; // one  | vzorka |  air
 const FLOAT_TYPE mi_one = 1.;
 
 const FLOAT_TYPE eps_a = 1.;
 const FLOAT_TYPE mi_a = 1.;
 
-const FLOAT_TYPE eps_b = 5.;
+const FLOAT_TYPE eps_b = 4.;
 const FLOAT_TYPE mi_b = 1.;
 
-const FLOAT_TYPE eps_air = 4.;
+const FLOAT_TYPE eps_air = 1.;
 const FLOAT_TYPE mi_air = 1.;
 
 int main()
 {
-	const int N = 64;
+	const int N = 72;
 	const FLOAT_TYPE l_a = 1;
-	const FLOAT_TYPE l_b = 0.5;
+	const FLOAT_TYPE l_b = 1;
 	const FLOAT_TYPE delta = 1e-2;
 	const FLOAT_TYPE theta_delta = 1e-2;
 	const FLOAT_TYPE omega_0 = PI/(2*sqrt(eps_b)*l_b);
@@ -42,7 +42,7 @@ int main()
 	}
 
 
-	for(int a=0; a<N; a++)
+	for(int a=0; a<2*N; a++)
 	{
 		eps_parr += structure[a][0]*structure[a][1];
 		iterator += structure[a][1];
@@ -50,7 +50,7 @@ int main()
 
 	eps_parr /= iterator;
 
-	for(int a=0; a<N; a++)
+	for(int a=0; a<2*N; a++)
 	{
 		eps_perp += structure[a][1]/structure[a][0];
 	}
@@ -63,6 +63,11 @@ int main()
 	Eigen::Matrix<COMPLEX_TYPE, 2, 2> Out;
 
 	ofstream fout("Output-TE.dat");
+	ofstream strout("structure.dat");
+	for(int g=0; g<2*N; g++)
+	{
+		strout << structure[g][0] << "\t" << structure[g][1] << endl;
+	}
 
 	for(FLOAT_TYPE omega = delta; omega <= 2*omega_0; omega+=delta)
 	{

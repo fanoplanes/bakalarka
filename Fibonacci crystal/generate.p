@@ -1,4 +1,10 @@
-set terminal png size 918,442 enhanced font "Arial,20"
+set terminal png size 1000,500 enhanced font "Arial,20"
+set tmargin 4
+set bmargin 4
+set lmargin 4
+set rmargin 4
+set xr[0:144]
+unset key
 
 set output 'plot0.png'
 plot 'Field0.dat' with lines

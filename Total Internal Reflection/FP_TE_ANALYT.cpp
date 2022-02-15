@@ -8,11 +8,11 @@ int main()
 {
 	//const double theta = 32*M_PI/128.;
 	const long double eps_1 = 4.;
-	const long double eps_2 = 3.012;
+	const long double eps_2 = 2.98675;
 	const long double eps_3 = 4.;
 	const long double eps_b = 5.;
 	const long double l_b = 0.5;
-	const long double l=1.5*64;
+	const long double l=1.5*144;
 	const long double delta = 1e-3;
 	const long double omega_0 = M_PI/(2*sqrt(eps_b)*l_b);
 	complex<long double> k_1z;
