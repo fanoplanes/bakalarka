@@ -17,8 +17,8 @@ const FLOAT_TYPE eps_air = 4.;
 const FLOAT_TYPE mi_air = 1.;
 
 int main() {
-	default_random_engine generator(156);
-	uniform_int_distribution<int> distribution(0,1);
+  default_random_engine generator(156);
+  uniform_int_distribution<int> distribution(0, 1);
 
   const int N = 144;
 
@@ -69,11 +69,12 @@ int main() {
 
   ofstream fout("Output-TE.dat");
   FLOAT_TYPE start = 0.00 / theta_delta;
-  FLOAT_TYPE stop = PI /(2 * theta_delta);
+  FLOAT_TYPE stop = PI / (2 * theta_delta);
 
   for (FLOAT_TYPE omega = delta; omega <= 2.5 * omega_0; omega += delta) {
     omp_set_num_threads(omp_get_max_threads());
-    #pragma omp parallel for schedule(dynamic) ordered default(shared) private(thett, Out)
+#pragma omp parallel for schedule(dynamic)                                     \
+    ordered default(shared) private(thett, Out)
 
     for (thett = (long int)start; thett <= (unsigned long int)(stop); thett++) {
 
@@ -81,12 +82,20 @@ int main() {
       Out = transfermatrix(eps_one, structure[0][0], theta, omega, eps_one);
 
       for (int i = 0; i < N - 1; i++) {
-        Out = intermatrix(structure[i][0], structure[i][1], theta, omega, eps_one) * Out;
-        Out = transfermatrix(structure[i][0], structure[i + 1][0], theta, omega, eps_one) * Out;
+        Out = intermatrix(structure[i][0], structure[i][1], theta, omega,
+                          eps_one) *
+              Out;
+        Out = transfermatrix(structure[i][0], structure[i + 1][0], theta, omega,
+                             eps_one) *
+              Out;
       }
 
-      Out = intermatrix(structure[N - 1][0], structure[N - 1][1], theta, omega, eps_one) * Out;
-      Out = transfermatrix(structure[N - 1][0], eps_air, theta, omega, eps_one) * Out;
+      Out = intermatrix(structure[N - 1][0], structure[N - 1][1], theta, omega,
+                        eps_one) *
+            Out;
+      Out =
+          transfermatrix(structure[N - 1][0], eps_air, theta, omega, eps_one) *
+          Out;
 
       COMPLEX_TYPE r = -Out(1, 0) / Out(1, 1);
       COMPLEX_TYPE t = 1. / Out(0, 0);
@@ -107,7 +116,7 @@ int main() {
            i * ((k_2z_an / k_3z_an) + (k_1z_an / k_2z_an)) * sin(k_2z_an * l));
       COMPLEX_TYPE R_an = norm(r_an);
 
-      #pragma omp ordered
+#pragma omp ordered
       {
         if (eps_one == eps_air) {
           fout << omega / omega_0 << "\t" << theta * 180. / PI << "\t"
@@ -124,6 +133,8 @@ int main() {
 }
 
 // Local Variables:
-// compile-command: "g++ -march=native -Ofast koeficienty-TE-parallel-difference.cpp -o \
-// koeficienty-TE-parallel-difference -lmpc -lmpfr -fopenmp && ./koeficienty-TE-parallel-difference"
+// compile-command: "g++ -march=native -Ofast \
+// koeficienty-TE-parallel-difference.cpp -o \
+// koeficienty-TE-parallel-difference -lmpc -lmpfr -fopenmp &&
+// ./koeficienty-TE-parallel-difference"
 // End:
