@@ -17,8 +17,8 @@ const FLOAT_TYPE eps_air = 4.;
 const FLOAT_TYPE mi_air = 1.;
 
 int main() {
-	ofstream fout("cumulant13.dat", ios::app);
-	for (int outer_iterator = 0; outer_iterator < 7607; outer_iterator++)
+	ofstream fout("cumulant13.dat");
+	for (int outer_iterator = 0; outer_iterator < 10000; outer_iterator++)
 	{
 	FLOAT_TYPE cumulator = 0;
 	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
@@ -35,8 +35,8 @@ int main() {
 	const FLOAT_TYPE l_a = (1 + phi) * l_average / (nu + phi);
 	const FLOAT_TYPE l_b = nu * l_a;
 
-	const FLOAT_TYPE delta = 5e-3;
-	const FLOAT_TYPE theta_delta = 5e-3;
+	const FLOAT_TYPE delta = 1e-2;
+	const FLOAT_TYPE theta_delta = 1e-2;
 
 	FLOAT_TYPE eps_parr = 0;
 	FLOAT_TYPE eps_perp = 0;
@@ -103,7 +103,7 @@ omp_set_num_threads(omp_get_max_threads());
 			}
 		}
 	}
-	fout << cumulator << endl;
+	fout << cumulator << "\t" << eps_parr << endl;
 	}
 	return 0;
 }

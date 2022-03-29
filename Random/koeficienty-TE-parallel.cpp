@@ -1,5 +1,6 @@
 #include "../Common/common.h"
 #include <random>
+#include <chrono>
 
 using namespace std;
 
@@ -9,17 +10,18 @@ const FLOAT_TYPE mi_one = 1.;
 const FLOAT_TYPE eps_a = 1.;
 const FLOAT_TYPE mi_a = 1.;
 
-const FLOAT_TYPE eps_b = 4.;
+const FLOAT_TYPE eps_b = 5.;
 const FLOAT_TYPE mi_b = 1.;
 
 const FLOAT_TYPE eps_air = 1.;
 const FLOAT_TYPE mi_air = 1.;
 
 int main() {
-	default_random_engine generator;
+	unsigned seed = std::chrono::system_clock::now().time_since_epoch().count();
+	default_random_engine generator (seed);
 	uniform_int_distribution<int> distribution(0,1);
 
-	const int N = 144;
+	const int N = 13;
 
 	const FLOAT_TYPE l_average = 1;
 
@@ -29,14 +31,12 @@ int main() {
 	const FLOAT_TYPE l_a = (1 + phi) * l_average / (nu + phi);
 	const FLOAT_TYPE l_b = nu * l_a;
 
-	const FLOAT_TYPE delta = 1e-2;
-	const FLOAT_TYPE theta_delta = 1e-2;
+	const FLOAT_TYPE delta = 5e-3;
+	const FLOAT_TYPE theta_delta = 5e-3;
 
 	FLOAT_TYPE eps_parr = 0;
 	FLOAT_TYPE eps_perp = 0;
 	FLOAT_TYPE iterator = 0;
-
-	const FLOAT_TYPE omega_0 = PI / (2 * sqrt(eps_b) * l_b);
 
 	FLOAT_TYPE structure[N][2];
 	unsigned long int thett;
@@ -62,6 +62,7 @@ int main() {
 
 	cout << eps_parr << endl;
 	cout << eps_perp << endl;
+	const FLOAT_TYPE omega_0 = PI / (2 * sqrt(eps_parr) * l_b);
 
 	Eigen::Matrix<COMPLEX_TYPE, 2, 2> Out;
 
@@ -74,8 +75,7 @@ int main() {
 
 	for (FLOAT_TYPE omega = delta; omega <= 2.0 * omega_0; omega += delta) {
 		omp_set_num_threads(omp_get_max_threads());
-#pragma omp parallel for schedule(dynamic)                                     \
-		ordered default(shared) private(thett, Out)
+#pragma omp parallel for schedule(dynamic) ordered default(shared) private(thett, Out)
 		for (thett = 0; thett <= (unsigned long int)(PI / (2. * theta_delta)); thett++) {
 			FLOAT_TYPE theta = thett * theta_delta;
 			Out = transfermatrix(eps_one, structure[0][0], theta, omega, eps_one);
