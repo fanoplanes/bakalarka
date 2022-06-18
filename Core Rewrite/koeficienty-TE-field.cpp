@@ -75,7 +75,7 @@ int main()
 
 			for(int i=0; i<2*N-1; i++)
 			{
-			      Out = I;
+			Out = I;
 				Out = intermatrix(structure[i][0], structure[i][1], theta, omega, eps_one) * Out; //
 				Out = transfermatrix(structure[i][0], structure[i+1][0], theta, omega, eps_one) * Out; //
 				E = Out * E;

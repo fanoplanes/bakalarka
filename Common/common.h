@@ -34,39 +34,28 @@ using namespace boost::multiprecision;
 
 const COMPLEX_TYPE i(0, 1);
 
-Eigen::Matrix<COMPLEX_TYPE, 2, 2> transfermatrix(FLOAT_TYPE, FLOAT_TYPE,
-                                                 FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE);
-Eigen::Matrix<COMPLEX_TYPE, 2, 2> intermatrix(FLOAT_TYPE, FLOAT_TYPE,
-                                              FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE);
+Eigen::Matrix<COMPLEX_TYPE, 2, 2> transfermatrix(FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE);
+Eigen::Matrix<COMPLEX_TYPE, 2, 2> intermatrix(FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE, FLOAT_TYPE);
 
-Eigen::Matrix<COMPLEX_TYPE, 2, 2> transfermatrix(FLOAT_TYPE permittivity1,
-                                                 FLOAT_TYPE permittivity2,
-                                                 FLOAT_TYPE theta,
-                                                 FLOAT_TYPE omega,
-                                                 FLOAT_TYPE eps_one)
+Eigen::Matrix<COMPLEX_TYPE, 2, 2> transfermatrix(FLOAT_TYPE permittivity1, FLOAT_TYPE permittivity2, FLOAT_TYPE theta, FLOAT_TYPE omega, FLOAT_TYPE eps_one)
 {
-
-      FLOAT_TYPE inter_1 = permittivity1 - eps_one * sin(theta) * sin(theta);
-      COMPLEX_TYPE k_1 = omega * sqrt(COMPLEX_TYPE(inter_1, 0));
-      FLOAT_TYPE inter_2 = permittivity2 - eps_one * sin(theta) * sin(theta);
-      COMPLEX_TYPE k_2 = omega * sqrt(COMPLEX_TYPE(inter_2, 0));
-      COMPLEX_TYPE chi_te = k_1 / k_2;
-      Eigen::Matrix<COMPLEX_TYPE, 2, 2> Out;
-      Out << 1. + chi_te, 1. - chi_te, 1. - chi_te, 1. + chi_te;
-      Out /= 2.;
-      return Out;
+	FLOAT_TYPE inter_1 = permittivity1 - eps_one * sin(theta) * sin(theta);
+	COMPLEX_TYPE k_1 = omega * sqrt(COMPLEX_TYPE(inter_1, 0));
+	FLOAT_TYPE inter_2 = permittivity2 - eps_one * sin(theta) * sin(theta);
+	COMPLEX_TYPE k_2 = omega * sqrt(COMPLEX_TYPE(inter_2, 0));
+	COMPLEX_TYPE chi_te = k_1 / k_2;
+	Eigen::Matrix<COMPLEX_TYPE, 2, 2> Out;
+	Out << 1. + chi_te, 1. - chi_te, 1. - chi_te, 1. + chi_te;
+	Out /= 2.;
+	return Out;
 }
 
-Eigen::Matrix<COMPLEX_TYPE, 2, 2> intermatrix(FLOAT_TYPE permittivity,
-                                              FLOAT_TYPE width,
-                                              FLOAT_TYPE theta,
-                                              FLOAT_TYPE omega,
-                                              FLOAT_TYPE eps_one)
+Eigen::Matrix<COMPLEX_TYPE, 2, 2> intermatrix(FLOAT_TYPE permittivity, FLOAT_TYPE width, FLOAT_TYPE theta, FLOAT_TYPE omega, FLOAT_TYPE eps_one)
 {
-      FLOAT_TYPE inter = permittivity - eps_one * sin(theta) * sin(theta);
-      COMPLEX_TYPE k = omega * sqrt(COMPLEX_TYPE(inter, 0));
-      COMPLEX_TYPE phi = i * k * width;
-      Eigen::Matrix<COMPLEX_TYPE, 2, 2> Out;
-      Out << exp(phi), 0, 0, exp(-phi);
-      return Out;
+	FLOAT_TYPE inter = permittivity - eps_one * sin(theta) * sin(theta);
+	COMPLEX_TYPE k = omega * sqrt(COMPLEX_TYPE(inter, 0));
+	COMPLEX_TYPE phi = i * k * width;
+	Eigen::Matrix<COMPLEX_TYPE, 2, 2> Out;
+	Out << exp(phi), 0, 0, exp(-phi);
+	return Out;
 }
